@@ -1,0 +1,32 @@
+{
+  "name": "webuna",
+  "version": "1.0.0",
+  "description": "sitio web de la comunidad UNA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ces1406/webUNA.git"
+  },
+  "keywords": [
+    "una",
+    "web",
+    "arte",
+    "universidad"
+  ],
+  "author": "cesar montalvan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ces1406/webUNA/issues"
+  },
+  "homepage": "https://github.com/ces1406/webUNA#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  }
+}
