@@ -3,7 +3,14 @@ import { Redirect } from 'react-router-dom';
 import {  IoIosMail, IoLogoFacebook, IoLogoYoutube, IoIosGlobe, IoIosCreate, IoIosCamera, IoMdKey,IoIosPerson } from 'react-icons/io'
 import { Form, Col, Button, Modal, Row } from 'react-bootstrap';
 import Template from '../common_components/pageTemplate';
-import ApodoField from '../common_components/apodoField';
+import ApodoField from '../common_components/FormFields/apodoField';
+import PassField from '../common_components/FormFields/passField';
+import MailField from '../common_components/FormFields/mailField';
+import FacebookField from '../common_components/FormFields/facebookField';
+import SocialField from '../common_components/FormFields/socialField';
+import YoutubeField from '../common_components/FormFields/youtubeField';
+import ImageField from '../common_components/FormFields/imageField';
+
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -104,64 +111,17 @@ class RegisterForm extends Component {
             <Template>
                 <Form onSubmit={this.handleSubmit}>
                     <ApodoField sobreClick={this.onClick} sobreBlur={this.checkApodo} manejarCambio={this.handleChange} apodo={this.state.apodo}  />
-
-                    <Form.Group as={Row} className="mt-5" >
-                        <Form.Label sm={4} className="mr-1 pt-1">
-                            <h5><IoIosMail style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />E-Mail</h5>
-                        </Form.Label>
-                        <Col sm={6}>
-                            <Form.Control placeholder="indica una dirección de mail para contactarte" name="mail" type="email" id="email" maxLength={62} onChange={this.handleChange} value={this.state.mail} />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} className="mt-5">
-                        <Form.Label sm={4} className="mr-1 pt-1">
-                            <h5><IoLogoFacebook style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Facebook</h5>
-                        </Form.Label>
-                        <Col sm={6}>
-                            <Form.Control placeholder="si quieres dar a conocer tu facebook" id="face" name="facebook" onChange={this.handleChange} maxLength={118} value={this.state.redSoc1} />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} className="mt-5">
-                        <Form.Label sm={4} className="mr-1 pt-1">
-                            <h5><IoIosGlobe style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Blog personal</h5>
-                        </Form.Label>
-                        <Col sm={6}>
-                            <Form.Control placeholder="si quieres dar a conocer tu blog o página web" id="blg" name="blog" onChange={this.handleChange} maxLength={118} value={this.state.redSoc2} />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} className="mt-5">
-                        <Form.Label sm={4} className="mr-1 pt-1 text-center">
-                            <h5><IoLogoYoutube style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Youtube</h5>
-                        </Form.Label >
-                        <Col sm={6}>
-                            <Form.Control placeholder="si quieres dar a conocer tu canal de youtube" id="yout" name="youtube" onChange={this.handleChange} maxLength={118} value={this.state.redSoc3} />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} className="mt-5">
-                        <Form.Label sm={4} className="mr-1 pt-1"><h5><IoIosCamera style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Sube opcionalmente una imagen que te identifique como miembro</h5> </Form.Label >
-                        <Col sm={6} style={{ color: 'rgba(230,240,255)' }}>
-                            <Form.Control id="avatar" name="imgAvatar" onChange={this.handleImg} as='input' type='file' />
-                            <div id="h7">Escoge una imgen no mayor a 10 KB</div>
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} className="mt-5">
-                        <Form.Label className="mr-1 pt-1"><h5><IoMdKey style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Elige una contraseña</h5></Form.Label>
-                        <Col sm={4}>
-                            <Form.Control type="password" name="pass1" placeholder="6 caracteres mínimo y 8 como máximo" maxLength={8} onChange={this.handleChange} value={this.state.pass1} />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} >
-                        <Form.Label className="mr-1 pt-1"><h5><IoMdKey style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Confirma la contraseña</h5></Form.Label>
-                        <Col sm={4}>
-                            <Form.Control type="password" name="pass2" placeholder="repite la contraseña" maxLength={8} onChange={this.handleChange} value={this.state.pass2} />
-                        </Col>
-                    </Form.Group>
+                    {this.state.avisoApodoRepe ?
+                        <h5 style={{color:'rgb(250,25,66)'}}>¡Atencion: ya existe un usuario con ese apodo!</h5>
+                        : null
+                    }
+                    <MailField manejarCambio={this.handleChange} mail={this.state.mail}/>
+                    <FacebookField manejarCambio={this.handleChange} mail={this.state.redSoc1}/>
+                    <SocialField manejarCambio={this.handleChange} mail={this.state.redSoc2}/>
+                    <YoutubeField manejarCambio={this.handleChange} mail={this.state.redSoc3}/>
+                    <ImageField manejarCambio={this.handleImg}/>
+                    <PassField  manejarCambio={this.handleChange} pass={this.state.pass1} />
+                    <PassField  manejarCambio={this.handleChange} pass={this.state.pass2} />
 
                     <Button variant="outline-info" type="submit" className="mb-3 mt-4">
                         <IoIosCreate style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Registrarse

@@ -13,7 +13,7 @@ class Home extends React.Component {
         console.log('Home->render()')
         return (
             <Template >
-                < h1 > CACA </h1>
+                < h1 > QUE DIOS TE BENDIGA </h1>
             </Template >
         )
     }
