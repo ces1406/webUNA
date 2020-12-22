@@ -1,0 +1,165 @@
+/*GENERALES(APLICABLES A TODO EL SITIO)*/
+*{
+  font-family: 'Montserrat', sans-serif !important;
+}
+h1{
+color: #EFECEA;
+font-size: 3.3ex;
+font-weight: 300 !important;
+}
+h2{
+color: #EFECEA;
+font-size: 2.2ex;
+}
+h3{
+color: #EFECEA;
+font-size: 1.7ex;
+}
+#h3Dark{
+  color: #502101;
+  font-size: 2.25ex;
+}
+h4{
+color: #EFECEA;
+font-size: 1.5ex;
+}
+h5{
+color: #EFECEA;
+font-size: 1.4ex;
+}
+#h5Dark{
+  color: #502101;
+  font-size: 1.5ex;
+}
+h6{
+color: #EFECEA;
+font-size: 1.30ex;
+}
+
+#h7Ligth{
+  color: #EFECEA;
+  font-size: 1.38ex;
+}
+p{
+color: #EFDCEA;
+font-size: 1.5ex;
+}
+small{
+color: #EFDCEA !important;
+font-size: 1.3ex !important;
+padding: 0ex 0ex 0ex 0ex !important;
+margin: 0ex 0ex 0ex 0ex !important;
+}
+a{
+text-decoration: none !important;
+color:#e4f7ff!important;
+}
+a:link ,a:visted{
+text-decoration: none !important;
+color:#FFFFFF!important;
+}
+a:focus, a:active{
+outline: 0;
+}
+a:hover{
+text-decoration: none !important;
+}
+.navBox:hover{
+  background-color: rgba(16, 37, 55, 0.85) !important;
+  border-color: #8c97a1;
+}
+.navBox{
+  text-align: left;
+  border-color: #8c97a1 !important;
+  border-width: 0.1em;
+  background-color: rgba(40,42,52,0.7) !important;
+  border-radius: 0.3em !important;
+  margin-bottom: 1em !important; 
+} 
+.navBox h4, .navBox h5{
+  color: #f1e8dc !important;  
+}
+/*.media{
+  display:block !important; /*sino los <Media> se ven horizontal*/
+/*}
+/* .btn{
+background-color:#092637 !important;
+color: #FFFFFF !important;
+border-style:solid solid solid solid !important;
+border-radius:0.87ex !important;
+border-color:#755B2D !important;
+border-width:0.18ex !important;
+} */
+.btn:link ,.btn:visted{
+/*text-decoration: none !important;*/
+color:#FFFFFF!important;
+}
+.page-link{
+  color:rgba(160, 37, 55, 0.85) !important
+}
+/* .btn:hover{
+text-decoration: none !important;
+} */
+body{
+  background-image: url("./imgs/pollock7.jpg") !important;
+  font-family:'Montserrat',sans-serif;
+	margin: 0ex 0ex 0ex 0ex;
+	padding: 0ex 0ex 0ex 0ex;
+}
+.text-muted,.small{
+  color: #FFFFFF !important;
+}
+#cuerpo{
+  color: rgba(31,36,45,0.68)!important;
+}
+#comentarioInicial{
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif !important;
+  font-weight: 400;
+  line-height: 19px;
+  font-size:18px;
+  color:  #fce8ba;
+}
+#rtaComentario{
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif !important;
+  font-weight: 400;
+  line-height: 18px;
+  font-size:16px;
+  color: #f5e7c7;
+}
+#infoUser{
+font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif !important;
+font-style: normal !important;
+font-weight: 700 !important;
+font-size: 15px !important;
+line-height: 20px !important;
+color: rgb(251, 200, 80);
+}
+#infoFech{
+font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif !important;
+font-style: normal !important;
+font-weight: 400 !important;
+font-size: 12px !important;
+line-height: 20px !important;
+color:  #d9caa5 !important;
+}
+/*
+#cke_editor1{
+  margin: 2em 2em 2em 2em !important;
+}*/
+#rtaComentario img {
+  max-width: 100%;
+  height: auto !important;
+}
+#comentarioInicial img {
+  max-width: 100%;
+  height: auto !important;
+}
+.smallButton{
+  height: 40%!important;
+}
+/*.boton1{
+  border-color: #8c97a1 !important;
+  border-width: 0.1em;
+  background-color: rgba(40,42,52,0.7) !important;
+  color:  #d9caa5 !important;
+}*/
