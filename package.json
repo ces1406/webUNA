@@ -4,6 +4,7 @@
   "description": "sitio web de la comunidad UNA",
   "main": "index.js",
   "scripts": {
+    "server": "nodemon back-end/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
