@@ -1,10 +1,6 @@
 require('dotenv').config({ path:'.development.env'});
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const Aplicacion = require('./src/Applicacion');
 
-const app = require('./src/app');
-
-async function iniciar (){
-    app.listen(app.get('port'));
-}
-
-iniciar();
+const app = new Aplicacion();
+app.startServer();
