@@ -32,15 +32,15 @@ class MainRoutes extends React.Component {
         this.getSections();
     }
     getSections() {
-        doSimpleCorsGetRequest('GET','/sections')
-        .then(rta=>this.setState({sections:rta}))
+        doSimpleCorsGetRequest('/sections')
+        .then(rta=>{this.setState({sections:rta.secciones});console.log('rta: ',rta)})
         .catch(err=>console.log('Error - '+err));
     }
     render() {
         return (         
             <Router>   
                 <Switch>                 
-                    <Route path="/" exact> <Home secs={this.state.sections}/> </Route>
+                    <Route path="/" exact> <Home secciones={this.state.sections}/> </Route>
                     <Route path={"/secciones/:idSec/:nameSec"} component={SomeSection} />
                     <Route path="/register" component={Registration}></Route>
                     <Route path="/loggin" component={Login}></Route>

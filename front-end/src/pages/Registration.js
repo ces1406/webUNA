@@ -10,6 +10,7 @@ import FacebookField from '../common_components/FormFields/facebookField';
 import SocialField from '../common_components/FormFields/socialField';
 import YoutubeField from '../common_components/FormFields/youtubeField';
 import ImageField from '../common_components/FormFields/imageField';
+import {doSimpleCorsPostRequest} from '../api_requests/requests';
 
 
 class RegisterForm extends Component {
@@ -86,6 +87,7 @@ class RegisterForm extends Component {
         if (this.state.submitOk) this.setState({ registrado: true });
     }
     handleChange(e) {
+        console.log('haciendo handleChange a->'+e.target.name)
         this.setState({[e.target.name]:e.target.value})
     }
     handleAvatar(evento) {
@@ -94,16 +96,17 @@ class RegisterForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         var data = new FormData(event.target);
-        if (this.checkInputs()) {
-            doRequest('POST', '/user', data, false)
+        //if (this.checkInputs()) {
+            doSimpleCorsPostRequest('/user', data, false)
                 .then(rta => {
                     this.setState({ submitOk: true });
                     this.setState({ msj: rta.msj })
                 })
                 .catch(err => {
+                    console.log('->Error; ',err)
                     this.setState({ msj: err.message });
                 });
-        }
+        //}
         this.handleShow();
     }
     render() {
@@ -111,32 +114,23 @@ class RegisterForm extends Component {
             <Template>
                 <Form onSubmit={this.handleSubmit}>
                     <ApodoField sobreClick={this.onClick} sobreBlur={this.checkApodo} manejarCambio={this.handleChange} apodo={this.state.apodo}  />
-                    {this.state.avisoApodoRepe ?
-                        <h5 style={{color:'rgb(250,25,66)'}}>¡Atencion: ya existe un usuario con ese apodo!</h5>
-                        : null
-                    }
+                    {this.state.avisoApodoRepe ? <h5 style={{color:'rgb(250,25,66)'}}>¡Atencion: ya existe un usuario con ese apodo!</h5> : null }
                     <MailField manejarCambio={this.handleChange} mail={this.state.mail}/>
                     <FacebookField manejarCambio={this.handleChange} mail={this.state.redSoc1}/>
                     <SocialField manejarCambio={this.handleChange} mail={this.state.redSoc2}/>
                     <YoutubeField manejarCambio={this.handleChange} mail={this.state.redSoc3}/>
                     <ImageField manejarCambio={this.handleImg}/>
-                    <PassField  manejarCambio={this.handleChange} pass={this.state.pass1} />
-                    <PassField  manejarCambio={this.handleChange} pass={this.state.pass2} />
+                    <PassField  manejarCambio={this.handleChange} pass={this.state.pass1} name='pass1' />
+                    <PassField  manejarCambio={this.handleChange} pass={this.state.pass2} name='pass2'/>
 
                     <Button variant="outline-info" type="submit" className="mb-3 mt-4">
                         <IoIosCreate style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Registrarse
                     </Button>
 
                     <Modal show={this.state.showModal} onHide={this.handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Registrarse</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p style={{ color: 'rgb(5,6,28' }}>{this.state.msj}</p>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="primary" onClick={this.handleClose}>Ok</Button>
-                        </Modal.Footer>
+                        <Modal.Header closeButton> <Modal.Title>Registrarse</Modal.Title> </Modal.Header>
+                        <Modal.Body> <p style={{ color: 'rgb(5,6,28' }}>{this.state.msj}</p> </Modal.Body>
+                        <Modal.Footer> <Button variant="primary" onClick={this.handleClose}>Ok</Button> </Modal.Footer>
                     </Modal>
                 </Form>
             </Template>

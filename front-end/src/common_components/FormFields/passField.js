@@ -16,7 +16,7 @@ export default class PassField extends React.Component{
                     <h5><IoMdKey style={{ marginBottom: "0.2em", marginRight: "0.4em" }} />Elige una contraseña</h5>
                 </Form.Label>
                 <Col sm={4}>
-                    <Form.Control type="password" name="pass1" placeholder="6 caracteres mínimo y 8 como máximo" maxLength={8} 
+                    <Form.Control type="password" name={this.props.name} placeholder="6 caracteres mínimo y 8 como máximo" maxLength={8} 
                         onChange={this.props.manejarCambio} 
                         value={this.props.pass} 
                     />
