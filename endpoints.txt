@@ -1,10 +1,35 @@
 USERS:
 -----
+POST    /user                                   : Creación de un usuario nuevo.
+POST    /user/login                             : Loggeo de un usuario.
+POST    /user/recuperapass                      : Recuperación de password.
+POST    /user/update                            : Actualización de los datos de un usuario.
+GET     /user/confirmretister/:idUser/:token    : Confirmación de registro de un nuevo usuario.
+GET     /user/checknick/:nick                   : Verificación de la existencia de un apodo (para que el usuario no intente registrarse con él).
+GET     /user/avatar/:dir                       : Pedido de la imagen de un usuario.
+GET     /user/:idUser                           : Pedido de los datos de un usuario (para su sección de perfil).
 
-POST    /user                                  : Creación de un usuario nuevo.
-POST    /user/login                            : Loggeo de un usuario.
-POST    /user/recuperapass                     : Recuperación de password.
-POST    /user/update                           : Actualización de los datos de un usuario.
-GET     /user/confirmretister/:idUser/:token   : Confirmación de registro de un nuevo usuario.
-GET     /user/checknick/:nick                  : Verificación de la existencia de un apodo (para que el usuario no intente registrarse con él).
+SECTIONS:
+--------
+GET     /sections                               : Obtener las distintas secciones principales.
+GET     /sections/:idSec/:pagActiva/:cantTem    : Obtener los temas de una sección.
+GET     /sections/checksection/:idSec/:nameSec  : Chequeo de la concordancia entre el id de la Sección y su nombre.
 
+TEMAS:
+----
+GET     /temas/ultimosComents                               : Obtener los últimos comentarios (cronologicamente).
+GET     /temas/comments/:idTema/:pagActiva/:cantCom         : Obtener comentarios sobre un tema. TODO:CREAR UNA RUTA COMENTARIOS?
+GET     /temas/:idTema                                      : Obtener un tema. 
+GET     /temas/getCatedra/:idCatedra                        : Obtener un foro de una catedra. TODO: CREAR UNA RUTA CATEDRAS?
+GET     /temas/getOpinions/:idCatedra/:pagActiva/:cantCom   : Obtener los comentarios en un foro de una catedra. TODO:IDEM. ANTERIOR.
+POST    /temas/comentario                                   : Guardar un comentario en un tema.
+POST    /temas/deletetema                                   : Eliminar un tema creado.
+POST    /temas                                              : Crear un tema nuevo.
+POST    /temas/postOpinion                                  : Guardar una opinion sobre una catedra.TODO:...
+POST    /temas/searchForos/:pagActiva/:cantPorPag           : Buscar el foro sobre una catedra. TODO:...
+POST    /temas/postForo                                     : Crear un foro para una catedra. TODO:...
+POST    /temas/searchapuntes/:pagActiva/:cantPorPag         : Busacar apuntes. TODO:...
+POST    /temas/apunte                                       : Subir un apunte. TODO:...
+POST    /temas/deletecoment                                 : Borrar un comentario.
+POST    /temas/deleteforo                                   : Borrar un foro de una catedra. TODO: CREAR UNA RUTA CATEDRAS?
+POST    /temas/deleteapunte                                 : Borrar un apunte subido. TODO: CREAR UNA RUTA APUNTES?
