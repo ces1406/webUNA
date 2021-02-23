@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const passport = require('passport');
+const {pasaporteJwt} = require ('./middlewares/passport');
 const RutasSecciones = require('./routes/RutasSecciones');
 const RutasUsuarios = require('./routes/RutasUsuarios');
 
@@ -18,7 +20,9 @@ class Applicacion {
         this.app.use(morgan('dev'));
         this.app.use(express.urlencoded({extended:false}));
         this.app.use(express.json());
-        this.app.use(this.handleCors)
+        this.app.use(this.handleCors);
+        this.app.use(passport.initialize());
+        passport.use('autenticacionjwt',pasaporteJwt);
         //this.app.use(express.static(path.join(__dirname,'../static_files')));
     }
     enrutar = ()=>{

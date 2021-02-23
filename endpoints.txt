@@ -1,0 +1,10 @@
+USERS:
+-----
+
+POST    /user                                  : Creación de un usuario nuevo.
+POST    /user/login                            : Loggeo de un usuario.
+POST    /user/recuperapass                     : Recuperación de password.
+POST    /user/update                           : Actualización de los datos de un usuario.
+GET     /user/confirmretister/:idUser/:token   : Confirmación de registro de un nuevo usuario.
+GET     /user/checknick/:nick                  : Verificación de la existencia de un apodo (para que el usuario no intente registrarse con él).
+
