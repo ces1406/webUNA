@@ -30,6 +30,7 @@ class Applicacion {
         const rutasUsuarios = new RutasUsuarios();
         this.app.use('/sections',rutasSecciones.router);
         this.app.use('/user',rutasUsuarios.router);
+        //this.app.use('/temas',rutasTemas.router);
     }
     handleCors = (req,res,next)=>{
         res.set('Access-Control-Allow-Origin','*');
