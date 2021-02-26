@@ -7,7 +7,7 @@ POST    /user/update                            : Actualización de los datos de
 GET     /user/confirmretister/:idUser/:token    : Confirmación de registro de un nuevo usuario.
 GET     /user/checknick/:nick                   : Verificación de la existencia de un apodo (para que el usuario no intente registrarse con él).
 GET     /user/avatar/:dir                       : Pedido de la imagen de un usuario.
-GET     /user/:idUser                           : Pedido de los datos de un usuario (para su sección de perfil).
+GET     /user/:nickname                         : Pedido de los datos de un usuario (para su sección de perfil).
 
 SECTIONS:
 --------

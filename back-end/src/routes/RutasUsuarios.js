@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const fs = require('fs');
 const validator = require('validator');
-const {autenticarJwt} = require('../middlewares/passport');
+const {autenticacionjwt} = require('../middlewares/passport');
 const jwt = require ('jsonwebtoken');
 
 class RutasUsuarios {
@@ -137,6 +137,7 @@ class RutasUsuarios {
                 res.status(err.code?err.code:409).send()
             })
     }
+    //TODO: eliminar getUsuarios
     getUsuarios = async (req,res)=>{
         try{
             const usuarios = await Usuarios.findAll();
@@ -372,14 +373,54 @@ class RutasUsuarios {
                     break;
             }
     }
+    getUsuario = async (req,res)=>{
+        try{
+            console.log('req.params'+JSON.stringify(req.params))
+            if(!await this.nicknameExist(req.params.apodo)){
+                let user = await Usuarios.findOne({where:{apodo:req.params.apodo}})
+                console.log('user: '+JSON.stringify(user));
+                return res.status(201).json({red1:user.redSocial1,red2:user.redSocial2,red3:user.redSocial3})
+            }else{
+                console.log('->recuperarpassw1: los user no coinciden')
+                    res.statusMessage = 'No existe el usuario';
+                    return res.status(401).send()
+            }
+        }catch(err){
+            console.log('->recuperarpassw2: los user no coinciden')
+                    res.statusMessage = err.msj;
+                    return res.status(err.code||500).send()
+        } 
+    }
+    getAvatar = async (req,res)=>{
+        try{
+            let user = await Usuarios.findOne({where:{apodo:req.params.dir.slice(5, req.params.dir.lastIndexOf("."))}});
+            var img = fs.createReadStream(path.join(__dirname, '../../usersimgs', user.dirImg));
+            img.on('open', () => {
+                //console.log('-->users.js->/user/avatar/ on open')
+                res.set('Content-type', 'image/' + path.extname(req.params.dir).slice(1))
+                img.pipe(res)
+            })
+            img.on('error', (err) => {
+                //console.log('-->users.js->/user/avatar/ on error')
+                res.set('Content-Type', 'text/plain');
+                res.status(404).end('not found')
+            })
+        }catch(err){
+            console.log('->recuperarpassw2: los user no coinciden')
+            res.statusMessage = err.msj;
+            return res.status(err.code||500).send()
+        } 
+    }
     routes(){
         //this.router.get('/', this.getUsuarios);
         this.router.post('/', this.validarImg, sanitizaRegistro, validaRegistro, this.postUsuario);
         this.router.post('/login',sanitizaLogin, validaLogin, this.login);
-        this.router.post('/recuperapass',sanitizaUserRecup, validadUserRecup, this.recuperarpassw)   
+        this.router.post('/recuperapass',sanitizaUserRecup, validadUserRecup, this.recuperarpassw);
+        this.router.post('/update/', autenticacionjwt, this.validarImg,this.updateUsuario);
+        this.router.get('/:apodo',this.getUsuario); //TODO: renombrar endpoint a "/redesSociales/:apodo" ??
+        this.router.get('/getUserData',autenticacionjwt);
         this.router.get('/checknick/:nick',this.nicknameExist);
-        this.router.post('/update/', this.validarImg,this.updateUsuario);//autenticarJwt,this.validarImg,this.updateUsuario);
-        //this.router.get('/:idUsuario', this.getUsuario);
+        this.router.get('/avatar/:dir',this.getAvatar);
         this.router.get('/confirmregister/:idUsuario/:token',this.habilitaUsuario)
     }
 }
