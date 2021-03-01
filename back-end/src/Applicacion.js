@@ -5,6 +5,7 @@ const passport = require('passport');
 const {pasaporteJwt} = require ('./middlewares/passport');
 const RutasSecciones = require('./routes/RutasSecciones');
 const RutasUsuarios = require('./routes/RutasUsuarios');
+const RutasTemas = require('./routes/RutasTemas');
 
 class Applicacion {
     constructor(){
@@ -28,9 +29,10 @@ class Applicacion {
     enrutar = ()=>{
         const rutasSecciones = new RutasSecciones();
         const rutasUsuarios = new RutasUsuarios();
+        const rutasTemas = new RutasTemas();
         this.app.use('/sections',rutasSecciones.router);
         this.app.use('/user',rutasUsuarios.router);
-        //this.app.use('/temas',rutasTemas.router);
+        this.app.use('/temas',rutasTemas.router);
     }
     handleCors = (req,res,next)=>{
         res.set('Access-Control-Allow-Origin','*');

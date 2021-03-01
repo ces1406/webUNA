@@ -31,4 +31,30 @@ const validadUserRecup = (req, res, next) => {
     };
     next();
 }
-module.exports = {validaRegistro, validaLogin, validadUserRecup}
+const validaApunte = (req,res,next) => {
+    //console.log('-->temas.js->validadorUpApunte->req.body: '+JSON.stringify(req.body))  
+    if (req.body.titulo.length > 100 || req.body.autor.length > 100 || req.body.materia.length > 120 || req.body.catedra.length > 100) {
+        res.status(201).send({ msj: 'Algunos campos son demasiado extensos' })        
+    } else {
+        next();
+    }
+}
+const validaEnlace = (req,res,next) => {
+    if (req.body.link.length > 270) {
+        res.status(201).send({ msj: 'Dirección del enlace demasiado extensa' })        
+    } else {
+        next();
+    }
+}
+const validaForo = (req, res, next) => {
+    if (req.body.profesor > 100 || req.body.materia.length > 120 || req.body.catedra.length > 60) {
+        res.status(500).send({ msj: 'algunos campos son demasiado extensos' })
+    } else if(req.body.materia.length==0||req.body.materia==null){
+        res.status(500).send({msj:'completa con una materia'})
+    }else if(!validator.isInt(req.body.idAutor)){
+        res.status(500).send({msj:'-error-'})
+    }else {
+        next();
+    }
+}
+module.exports = {validaRegistro, validaLogin, validadUserRecup, validaApunte, validaEnlace, validaForo}
