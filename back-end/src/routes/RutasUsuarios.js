@@ -96,7 +96,7 @@ class RutasUsuarios {
                     fechaIngreso: (new Date()).toJSON().slice(0,19).replace('T',' '),
                     estadoCuenta:'SINCONF',
                     token: token,
-                    dirImg: req.file? ('user-'+req.body.apodo+path.extname(req.file.originalname).toLowerCase() ): false,
+                    dirImg: req.file? ('user-'+req.body.apodo+path.extname(req.file.originalname).toLowerCase() ): null,
                     redSocial1:req.body.facebook,
                     redSocial2:req.body.blog,
                     redSocial3:req.body.youtube });

@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const path = require('path');
-const {start,Apuntes} = require('../model/db');
+const {start,Apuntes, Usuarios} = require('../model/db');
 const {sanitizaApunte, sanitizaLink} = require('../middlewares/sanitize');
 const {validaApunte, validaEnlace} = require('../middlewares/validate');
 const {autenticacionjwt} = require('../middlewares/passport');
@@ -25,7 +25,7 @@ class RutasApuntes {
                     dirurl:req.body.link,
                     catedra:req.body.catedra,
                     usuario:req.body.idUsuario,
-                    fechaSubida: (new Date()).toJSON().slice(0,19).replace('T',' '),
+                    fechaSubida: (new Date()).toJSON().slice(0,19).replace('T',' ')
                 });
                 res.status(201).send({msg:'El apunte fue subido'}); // TODO: opcion->contestar con el apunte creado-segun REST-
             }
@@ -34,8 +34,14 @@ class RutasApuntes {
         }
     }
     search = async (req,res) => {
+        console.log('search')
         try {
             let rta = await Apuntes.findAll({
+                include:[{
+                    model:Usuarios,
+                    required:true,
+                    attributes:['apodo'],                    
+                }],
                 where:{
                     [Op.and]:[
                         {autores:{[Op.like]:'%'+req.body.autor+'%'}},
@@ -47,6 +53,7 @@ class RutasApuntes {
                 offset:(req.params.pagActiva-1)*req.params.cantPorPag,
                 limit:parseInt(req.params.cantPorPag,10)
             })
+            console.log('rta: ',rta)
             return res.status(201).json(rta)
         } catch (err) {
             res.status(500).send({ msg: err.msg })
@@ -54,6 +61,7 @@ class RutasApuntes {
     }
     delete = async (req,res) => {
         try {
+            //TODO: chequear que sea un Admin
             await Apuntes.destroy({where:{idApunte:req.body.idApunte}});
             res.status(201).send({ msj: 'el apunte se elimino' })
         } catch (error) {
